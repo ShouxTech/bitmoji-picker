@@ -1,9 +1,11 @@
 import Search from '../assets/icons/Search.svg'
 import Exit from '../assets/icons/Exit.svg'
-import { forwardRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const SearchBox = forwardRef(function SearchBox(props, ref) {
+function SearchBox(props) {
     const [query, setQuery] = useState('');
+
+    const searchBoxRef = useRef();
 
     function changeQuery(e) {
         setQuery(e.target.value);
@@ -20,6 +22,20 @@ const SearchBox = forwardRef(function SearchBox(props, ref) {
         }
     }
 
+    useEffect(() => {
+        function listener(e) {
+            if (e.key == 'f') {
+                searchBoxRef.current.focus();
+            }
+        }
+
+        window.addEventListener('keyup', listener);
+
+        return () => {
+            window.removeEventListener('keyup', listener);
+        }
+    }, []);
+
     return (
         <>
             {/* Align to middle */}
@@ -28,11 +44,11 @@ const SearchBox = forwardRef(function SearchBox(props, ref) {
                 <div className='w-[97%] fixed top-2'>
                     <img className="z-10 absolute left-2 top-1" src={Search} width={25} height={25}/>
                     <img className={`z-10 absolute right-2 top-1 cursor-pointer ${(query.length == 0) && 'hidden'}`} src={Exit} width={25} height={25} onClick={clearQuery}/>
-                    <input type="text" className="w-full bg-zinc-700 h-8 text-gray-200 p-3 pl-10 outline-none font-roboto rounded-full" placeholder="Search" value={query} ref={ref} onChange={changeQuery} onKeyDown={onInputKeyDown}/>
+                    <input type="text" className="w-full bg-zinc-700 h-8 text-gray-200 p-3 pl-10 outline-none font-roboto rounded-full" placeholder="Search" value={query} ref={searchBoxRef} onChange={changeQuery} onKeyDown={onInputKeyDown}/>
                 </div>
             </div>
         </>
     )
-});
+};
 
 export default SearchBox;
