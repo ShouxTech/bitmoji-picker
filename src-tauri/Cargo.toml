@@ -1,11 +1,11 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+name = "bitmoji-picker"
+version = "1.0.0"
+description = "Use any Bitmoji sticker right from your desktop"
+authors = ["CriShoux"]
 license = ""
 repository = ""
-default-run = "app"
+default-run = "bitmoji-picker"
 edition = "2021"
 rust-version = "1.60"
 
