@@ -55,7 +55,7 @@ function Stickers(props) {
     }
 
     return (
-        <div className="flex flex-wrap w-full mt-11 justify-evenly">
+        <div className="flex flex-wrap w-full mt-11">
             {imageUrls.map((url) => {
                 return (
                     <img key={url} className="m-2 cursor-pointer hover:bg-zinc-500/25 rounded" src={url} alt="Sticker" width={100} height={100} onClick={onImageClick}></img>
